@@ -22,16 +22,12 @@ const getUserInfo = (req, res, next) => {
 const createUser = (req, res, next) => {
   const {
     name,
-    about,
-    avatar,
     email,
     password,
   } = req.body;
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
-      about,
-      avatar,
       email,
       password: hash,
     }))
@@ -56,7 +52,16 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.status(200).send({ token });
+      res.cookie(
+        'authorization',
+        token,
+        {
+          maxAge: 360000,
+          httpOnly: true,
+          sameSite: true,
+        },
+      );
+      res.status(200).send({ message: 'Успешный вход' });
     })
     .catch(next);
 };
