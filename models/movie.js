@@ -15,11 +15,11 @@ const movieSchema = new mongoose.Schema({
     required: [true, 'Поле "duration" должно быть заполнено'],
   },
   year: {
-    type: Number,
+    type: String,
     required: [true, 'Поле "year" должно быть заполнено'],
   },
   description: {
-    type: Number,
+    type: String,
     required: [true, 'Поле "description" должно быть заполнено'],
   },
   image: {

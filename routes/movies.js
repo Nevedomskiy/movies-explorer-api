@@ -17,7 +17,7 @@ router.post(
       country: Joi.string().required(),
       director: Joi.string().required(),
       duration: Joi.number().required(),
-      year: Joi.number().required(),
+      year: Joi.string().required(),
       description: Joi.string().required(),
       image: Joi.string().required().custom(validIsURL),
       trailerLink: Joi.string().required().custom(validIsURL),
