@@ -69,7 +69,4 @@ app.use(errorLogger);
 // конечная обработка ошибок
 app.use(errorHandler);
 
-app.listen(PORT, (err) => {
-  // eslint-disable-next-line no-console, no-unused-expressions
-  err ? console.log(err) : console.log(`Listening port ${PORT}`);
-});
+app.listen(PORT);
