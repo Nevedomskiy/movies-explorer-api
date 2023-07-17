@@ -56,7 +56,7 @@ const login = (req, res, next) => {
         'authorization',
         token,
         {
-          maxAge: 360000,
+          maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
         },
