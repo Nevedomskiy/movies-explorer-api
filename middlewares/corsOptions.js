@@ -1,6 +1,6 @@
 const allowedCors = [
-  'https://practic.front.nvv.nomoreparties.sbs',
-  'http://practic.front.nvv.nomoreparties.sbs',
+  'https://diplom.frontend.nomoredomains.xyz',
+  'http://diplom.frontend.nomoredomains.xyz',
   'http://localhost:3000',
 ];
 
