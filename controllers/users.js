@@ -66,9 +66,15 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logOut = (req, res) => {
+  res.clearCookie('authorization').send({ message: 'Успешный выход' });
+  req.user = null;
+};
+
 module.exports = {
   createUser,
   getUserInfo,
   changeUserInfo,
   login,
+  logOut,
 };

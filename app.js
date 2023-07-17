@@ -12,8 +12,8 @@ const corsOptions = require('./middlewares/corsOptions');
 const routes = require('./routes/index');
 const limiterOptions = require('./middlewares/limiterOptions');
 
-const { PORT = 3000 } = process.env;
-const URL = 'mongodb://localhost:27017/bitfilmsdb';
+const { PORT = 3000, URL_DB } = process.env;
+
 const app = express();
 
 // логирование запросов
@@ -49,7 +49,7 @@ app.get('/crash-test', () => {
 
 // подключаем базу данных
 mongoose
-  .connect(URL, {
+  .connect(URL_DB, {
     useNewUrlParser: true,
     family: 4,
   });
