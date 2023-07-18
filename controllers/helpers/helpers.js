@@ -1,7 +1,17 @@
 const NotFoundError = require('../../errors/not-found-err');
 const BadRequestError = require('../../errors/bad-request-error');
+const ConflictingRequestError = require('../../errors/conflicting-request-error');
 
-const changeData = (out, body, id, req, res, next, errMessageNotFound) => {
+const changeData = (
+  out,
+  body,
+  id,
+  res,
+  next,
+  errMessageUserNotFound,
+  errMessageMailIsRegistered,
+  errMessageIncorrectUpdateDataUser,
+) => {
   out
     .findByIdAndUpdate(
       id,
@@ -11,36 +21,28 @@ const changeData = (out, body, id, req, res, next, errMessageNotFound) => {
         runValidators: true,
       },
     )
-    .orFail(new NotFoundError(errMessageNotFound))
+    .orFail(new NotFoundError(errMessageUserNotFound))
     .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при обновлении профиля.'));
+      if (err.code === 11000) {
+        next(new ConflictingRequestError(errMessageMailIsRegistered));
+      } else if (err.name === 'ValidationError') {
+        next(new BadRequestError(errMessageIncorrectUpdateDataUser));
       } else {
         next(err);
       }
     });
 };
 
-const getData = (out, req, res, next) => {
-  out
-    .find({})
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch(next);
-};
-
-const getUserData = (out, id, res, next, errMessageNotFound) => {
+const getUserData = (out, id, res, next, errMessageUserNotFound) => {
   out
     .findById(id)
-    .orFail(new NotFoundError(errMessageNotFound))
+    .orFail(new NotFoundError(errMessageUserNotFound))
     .then((user) => res.status(200).send(user))
     .catch(next);
 };
 
 module.exports = {
   changeData,
-  getData,
   getUserData,
 };

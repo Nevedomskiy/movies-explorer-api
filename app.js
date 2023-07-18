@@ -11,8 +11,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const corsOptions = require('./middlewares/corsOptions');
 const routes = require('./routes/index');
 const limiterOptions = require('./middlewares/limiterOptions');
-
-const { PORT = 3000, URL_DB } = process.env;
+const { PORT, URL_DB } = require('./utils/config/config');
 
 const app = express();
 

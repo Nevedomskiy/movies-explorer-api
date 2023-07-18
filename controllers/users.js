@@ -5,14 +5,31 @@ const { changeData, getUserData } = require('./helpers/helpers');
 const BadRequestError = require('../errors/bad-request-error');
 const ConflictingRequestError = require('../errors/conflicting-request-error');
 
-const errMessageUserNotFound = 'Пользователь не найден';
+const {
+  errMessageUserNotFound,
+  errMessageMailIsRegistered,
+  messageSuccessfulExit,
+  messageSuccessfulLogin,
+  errMessageIncorrectUpdateDataUser,
+  errMessageIncorrectCreateDataUser,
+} = require('../utils/constants/constants');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const {
+  DEV_SECRET, NODE_ENV, JWT_SECRET,
+} = require('../utils/config/config');
 
 const changeUserInfo = (req, res) => {
   const me = req.user._id;
   const { name, about } = req.body;
-  changeData(User, { name, about }, me, req, res, errMessageUserNotFound);
+  changeData(
+    User,
+    { name, about },
+    me,
+    res,
+    errMessageUserNotFound,
+    errMessageMailIsRegistered,
+    errMessageIncorrectUpdateDataUser,
+  );
 };
 
 const getUserInfo = (req, res, next) => {
@@ -34,9 +51,9 @@ const createUser = (req, res, next) => {
     .then((user) => res.status(201).send(user))
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictingRequestError('Данная почта уже зарегистрирована'));
+        next(new ConflictingRequestError(errMessageMailIsRegistered));
       } else if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при создании пользователя.'));
+        next(new BadRequestError(errMessageIncorrectCreateDataUser));
       } else {
         next(err);
       }
@@ -49,7 +66,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET,
         { expiresIn: '7d' },
       );
       res.cookie(
@@ -61,13 +78,13 @@ const login = (req, res, next) => {
           sameSite: true,
         },
       );
-      res.status(200).send({ message: 'Успешный вход' });
+      res.status(200).send({ message: messageSuccessfulLogin });
     })
     .catch(next);
 };
 
 const logOut = (req, res) => {
-  res.clearCookie('authorization').send({ message: 'Успешный выход' });
+  res.clearCookie('authorization').send({ message: messageSuccessfulExit });
   req.user = null;
 };
 

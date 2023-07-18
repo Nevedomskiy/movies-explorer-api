@@ -1,9 +1,26 @@
 const router = require('express').Router();
-const moviesRouter = require('./movies');
-const userRouter = require('./users');
 const auth = require('../middlewares/auth');
-const { validationLogin, validationCreateUser } = require('../validation/validation');
-const { login, createUser, logOut } = require('../controllers/users');
+const {
+  validationLogin,
+  validationCreateUser,
+  validationAddMovies,
+  validationRemoveMovies,
+  validationPatchUser,
+} = require('../validation/validation');
+
+const {
+  login,
+  createUser,
+  logOut,
+  getUserInfo,
+  changeUserInfo,
+} = require('../controllers/users');
+
+const {
+  getMovies,
+  createMovie,
+  removeMovieById,
+} = require('../controllers/movies');
 
 router.post(
   '/signin',
@@ -15,9 +32,30 @@ router.post(
   validationCreateUser,
   createUser,
 );
+
 router.use(auth);
+
+router.get('/movies', getMovies);
+
+router.post(
+  '/movies',
+  validationAddMovies,
+  createMovie,
+);
+
+router.delete(
+  '/movies/:id',
+  validationRemoveMovies,
+  removeMovieById,
+);
+router.get('/users/me', getUserInfo);
+
+router.patch(
+  '/users/me',
+  validationPatchUser,
+  changeUserInfo,
+);
+
 router.post('/signout', logOut);
-router.use('/movies', moviesRouter);
-router.use('/users', userRouter);
 
 module.exports = router;

@@ -1,13 +1,14 @@
 const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
 const BadRequestError = require('../errors/bad-request-error');
+const errMessageLinkIsNotValid = require('../utils/constants/constants');
 
 const validIsURL = (value) => {
   const result = validator.isURL(value);
   if (result) {
     return value;
   }
-  throw new BadRequestError('Ссылка невалидна');
+  throw new BadRequestError(errMessageLinkIsNotValid);
 };
 
 const validationAddMovies = celebrate({
@@ -35,6 +36,7 @@ const validationRemoveMovies = celebrate({
 const validationPatchUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
