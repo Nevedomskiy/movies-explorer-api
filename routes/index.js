@@ -3,24 +3,16 @@ const auth = require('../middlewares/auth');
 const {
   validationLogin,
   validationCreateUser,
-  validationAddMovies,
-  validationRemoveMovies,
-  validationPatchUser,
-} = require('../validation/validation');
+} = require('../utils/validation/validation');
+const userRoutes = require('./users');
+const moviesRoutes = require('./movies');
+const { logOut } = require('../controllers/users');
+const errorBadUrl = require('../middlewares/errorBadUrl');
 
 const {
   login,
   createUser,
-  logOut,
-  getUserInfo,
-  changeUserInfo,
 } = require('../controllers/users');
-
-const {
-  getMovies,
-  createMovie,
-  removeMovieById,
-} = require('../controllers/movies');
 
 router.post(
   '/signin',
@@ -35,27 +27,13 @@ router.post(
 
 router.use(auth);
 
-router.get('/movies', getMovies);
-
-router.post(
-  '/movies',
-  validationAddMovies,
-  createMovie,
-);
-
-router.delete(
-  '/movies/:id',
-  validationRemoveMovies,
-  removeMovieById,
-);
-router.get('/users/me', getUserInfo);
-
-router.patch(
-  '/users/me',
-  validationPatchUser,
-  changeUserInfo,
-);
-
 router.post('/signout', logOut);
+
+router.use('/users', userRoutes);
+
+router.use('/movies', moviesRoutes);
+
+// обработка ошибки с неправильным адресом запроса
+router.use(errorBadUrl);
 
 module.exports = router;

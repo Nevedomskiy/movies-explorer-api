@@ -7,19 +7,19 @@ const { errMessageIncorrectMailOrPassword } = require('../utils/constants/consta
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: [2, 'Минимальная длина поля "name" - 2 символа'],
-    maxlength: [30, 'Максимальная длина поля "name" - 30 символов'],
+    minlength: 2,
+    maxlength: 30,
     default: 'Жак-Ив Кусто',
   },
   email: {
     type: String,
-    required: [true, 'Поле "email" должно быть заполнено'],
+    required: true,
     unique: true,
-    validate: [validator.isEmail, 'Некорректный email'],
+    validate: validator.isEmail,
   },
   password: {
     type: String,
-    required: [true, 'Поле "password" должно быть заполнено'],
+    required: true,
     select: false,
   },
 }, { versionKey: false });

@@ -1,5 +1,6 @@
 const NotFoundError = require('../errors/not-found-err');
+const { errMessageBadUrl } = require('../utils/constants/constants');
 
 module.exports = () => {
-  throw new NotFoundError('Маршрут указан некорректно');
+  throw new NotFoundError(errMessageBadUrl);
 };

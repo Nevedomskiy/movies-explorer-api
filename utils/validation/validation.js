@@ -1,7 +1,7 @@
 const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
-const BadRequestError = require('../errors/bad-request-error');
-const errMessageLinkIsNotValid = require('../utils/constants/constants');
+const BadRequestError = require('../../errors/bad-request-error');
+const errMessageLinkIsNotValid = require('../constants/constants');
 
 const validIsURL = (value) => {
   const result = validator.isURL(value);

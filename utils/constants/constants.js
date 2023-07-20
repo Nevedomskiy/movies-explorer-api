@@ -9,6 +9,9 @@ const errMessageUserNotFound = 'Пользователь не найден';
 const errMessageLinkIsNotValid = 'Ссылка невалидна';
 const errMessageIncorrectMailOrPassword = 'Неправильные почта или пароль';
 const errMessageUnauthorized = 'Необходима авторизация';
+const errMessageBadUrl = 'Маршрут указан некорректно';
+const errMessageServerProblem = 'На сервере произошла ошибка';
+const errMessageServerCrack = 'Сервер сейчас упадёт';
 
 // сообщения ответов
 const messageSuccessfulLogin = 'Успешный вход';
@@ -29,4 +32,7 @@ module.exports = {
   messageSuccessfulExit,
   messageMovieDeleted,
   errMessageUnauthorized,
+  errMessageBadUrl,
+  errMessageServerProblem,
+  errMessageServerCrack,
 };

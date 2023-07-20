@@ -20,10 +20,10 @@ const {
 
 const changeUserInfo = (req, res) => {
   const me = req.user._id;
-  const { name, about } = req.body;
+  const { name, email } = req.body;
   changeData(
     User,
-    { name, about },
+    { name, email },
     me,
     res,
     errMessageUserNotFound,

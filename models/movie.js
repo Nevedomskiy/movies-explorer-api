@@ -4,55 +4,55 @@ const validator = require('validator');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, 'Поле "country" должно быть заполнено'],
+    required: true,
   },
   director: {
     type: String,
-    required: [true, 'Поле "director" должно быть заполнено'],
+    required: true,
   },
   duration: {
     type: Number,
-    required: [true, 'Поле "duration" должно быть заполнено'],
+    required: true,
   },
   year: {
     type: String,
-    required: [true, 'Поле "year" должно быть заполнено'],
+    required: true,
   },
   description: {
     type: String,
-    required: [true, 'Поле "description" должно быть заполнено'],
+    required: true,
   },
   image: {
     type: String,
-    required: [true, 'Поле "image" должно быть заполнено'],
-    validate: [validator.isURL, 'Некорректная ссылка на постер к фильму'],
+    required: true,
+    validate: validator.isURL,
   },
   trailerLink: {
     type: String,
-    required: [true, 'Поле "trailerLink" должно быть заполнено'],
-    validate: [validator.isURL, 'Некорректная ссылка на трейлер фильма'],
+    required: true,
+    validate: validator.isURL,
   },
   thumbnail: {
     type: String,
-    required: [true, 'Поле "thumbnail " должно быть заполнено'],
-    validate: [validator.isURL, 'Некорректная ссылка на миниатюрное изображение к фильму'],
+    required: true,
+    validate: validator.isURL,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: [true, 'Поле "owner" должно быть заполнено'],
+    required: true,
   },
   movieId: {
     type: Number,
-    required: [true, 'Поле "movieId" должно быть заполнено'],
+    required: true,
   },
   nameRU: {
     type: String,
-    required: [true, 'Поле "nameRU" должно быть заполнено'],
+    required: true,
   },
   nameEN: {
     type: String,
-    required: [true, 'Поле "nameEN" должно быть заполнено'],
+    required: true,
   },
 }, { versionKey: false });
 

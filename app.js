@@ -6,12 +6,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const errorBadUrl = require('./middlewares/errorBadUrl');
 const errorHandler = require('./middlewares/errorHandler');
 const corsOptions = require('./middlewares/corsOptions');
 const routes = require('./routes/index');
 const limiterOptions = require('./middlewares/limiterOptions');
 const { PORT, URL_DB } = require('./utils/config/config');
+const { errMessageServerCrack } = require('./utils/constants/constants');
 
 const app = express();
 
@@ -42,7 +42,7 @@ app.use(corsOptions);
 // проверка работоспособности pm2 на сервере(поднимает сервер после ошибки)
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new Error(errMessageServerCrack);
   }, 0);
 });
 
@@ -58,9 +58,6 @@ app.use(routes);
 
 // обработка ошибок celebrate
 app.use(errors());
-
-// обработка ошибки с неправильным адресом запроса
-app.use(errorBadUrl);
 
 // логирование ошибок
 app.use(errorLogger);
