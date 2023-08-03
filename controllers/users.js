@@ -85,7 +85,7 @@ const login = (req, res, next) => {
 };
 
 const logOut = (req, res) => {
-  res.clearCookie('authorization').send({ message: messageSuccessfulExit });
+  res.clearCookie('authorization').end();
   req.user = null;
 };
 
