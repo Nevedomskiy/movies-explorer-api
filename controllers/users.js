@@ -8,7 +8,6 @@ const ConflictingRequestError = require('../errors/conflicting-request-error');
 const {
   errMessageUserNotFound,
   errMessageMailIsRegistered,
-  messageSuccessfulExit,
   messageSuccessfulLogin,
   errMessageIncorrectUpdateDataUser,
   errMessageIncorrectCreateDataUser,
@@ -85,8 +84,8 @@ const login = (req, res, next) => {
 };
 
 const logOut = (req, res) => {
-  res.clearCookie('authorization').end();
   req.user = null;
+  res.clearCookie('authorization').end();
 };
 
 module.exports = {
