@@ -74,7 +74,8 @@ const login = (req, res, next) => {
         {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          sameSite: true,
+          sameSite: 'none',
+          secure: true,
         },
       );
       res.status(200).send({ message: messageSuccessfulLogin });
@@ -84,7 +85,8 @@ const login = (req, res, next) => {
 
 const logOut = (req, res) => {
   req.user = null;
-  res.clearCookie('authorization').end();
+  res.clearCookie('authorization');
+  res.end();
 };
 
 module.exports = {
