@@ -74,7 +74,7 @@ const login = (req, res, next) => {
         {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          secure: false, // отключил для разработки
+          secure: true,
         },
       );
       res.status(200).send({ message: messageSuccessfulLogin });
