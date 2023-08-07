@@ -17,7 +17,7 @@ const {
   DEV_SECRET, NODE_ENV, JWT_SECRET,
 } = require('../utils/config/config');
 
-const changeUserInfo = (req, res) => {
+const changeUserInfo = (req, res, next) => {
   const me = req.user._id;
   const { name, email } = req.body;
   changeData(
@@ -25,6 +25,7 @@ const changeUserInfo = (req, res) => {
     { name, email },
     me,
     res,
+    next,
     errMessageUserNotFound,
     errMessageMailIsRegistered,
     errMessageIncorrectUpdateDataUser,
