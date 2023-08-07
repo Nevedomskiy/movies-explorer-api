@@ -23,16 +23,15 @@ const changeData = (
     )
     // .orFail(new NotFoundError(errMessageUserNotFound))
     .then((user) => {
-      if (!user) {
-        const err = new NotFoundError(errMessageUserNotFound);
-        throw err;
+      if (user) {
+        res.status(200).send(user);
       }
-      res.status(200).send(user);
+      throw new NotFoundError(errMessageUserNotFound);
     })
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictingRequestError(errMessageMailIsRegistered));
-      } else if (err.name === 'ValidationError') {
+      } else if (err.message === 'Validation failed') {
         next(new BadRequestError(errMessageIncorrectUpdateDataUser));
       } else {
         next(err);
