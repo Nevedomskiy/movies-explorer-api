@@ -21,8 +21,14 @@ const changeData = (
         runValidators: true,
       },
     )
-    .orFail(new NotFoundError(errMessageUserNotFound))
-    .then((user) => res.status(200).send(user))
+    // .orFail(new NotFoundError(errMessageUserNotFound))
+    .then((user) => {
+      if (!user) {
+        const err = new NotFoundError(errMessageUserNotFound);
+        throw err;
+      }
+      res.status(200).send(user);
+    })
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictingRequestError(errMessageMailIsRegistered));
