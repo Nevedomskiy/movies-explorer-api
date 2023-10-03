@@ -1,7 +1,6 @@
 const allowedCors = [
-  'https://diplom.frontend.nomoredomains.xyz',
-  'http://diplom.frontend.nomoredomains.xyz',
-  'http://localhost:3000',
+  'https://incredible-tiramisu-f185af.netlify.app',
+  'http://incredible-tiramisu-f185af.netlify.app',
 ];
 
 module.exports = (req, res, next) => {
