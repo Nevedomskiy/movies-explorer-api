@@ -1,0 +1,7 @@
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "prettier.disableLanguages": ["scss", "css", "less", "js", "json", "ts"]
+}

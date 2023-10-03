@@ -1,0 +1,7 @@
+.button-home {
+  object-fit: cover;
+  width: 38px;
+  height: 38px;
+  display: block;
+  background: url(../../images/logo.svg) 100% / cover no-repeat;
+}

@@ -1,0 +1,11 @@
+.errors__element {
+  margin: 0;
+  color: red;
+  border-top: 2px solid red;
+}
+
+.errors__info {
+  margin: 0;
+  color: #888;
+  border-top: 2px solid #888;
+}

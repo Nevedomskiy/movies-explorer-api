@@ -1,0 +1,23 @@
+/* Подключаем normalize */
+
+@import url(./vendor/styles/normalize.css);
+
+/* Подключаем fonts */
+
+@import url(./vendor/fonts/fonts.css);
+
+/* Подключаем общие стили */
+
+@import url(./generalStyle/conteiner/container.css);
+
+@import url(./generalStyle/list/list.css);
+
+@import url(./generalStyle/button/button.css);
+
+@import url(./generalStyle/bodywork/bodywork.css);
+
+@import url(./generalStyle/page/page.css);
+
+@import url(./generalStyle/burger/burger.css);
+
+@import url(./generalStyle/errors/errors.css);

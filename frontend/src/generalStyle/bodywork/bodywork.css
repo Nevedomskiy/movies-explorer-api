@@ -1,0 +1,12 @@
+.bodywork {
+  background-color: #fff;
+  line-height: normal;
+  color: #000;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
