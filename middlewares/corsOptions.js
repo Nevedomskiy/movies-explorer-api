@@ -1,5 +1,5 @@
 const allowedCors = [
-  'https://incredible-tiramisu-f185af.netlify.app',
+  'https://gregarious-blini-288e3d.netlify.app',
   'http://incredible-tiramisu-f185af.netlify.app',
 ];
 
