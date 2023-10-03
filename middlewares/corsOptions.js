@@ -1,5 +1,5 @@
 const allowedCors = [
-  'https://movies-ph87.onrender.com/',
+  'https://movies-ph87.onrender.com',
 ];
 
 module.exports = (req, res, next) => {
