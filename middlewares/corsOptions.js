@@ -1,6 +1,5 @@
 const allowedCors = [
-  'https://gregarious-blini-288e3d.netlify.app',
-  'http://incredible-tiramisu-f185af.netlify.app',
+  'https://movies-ph87.onrender.com/',
 ];
 
 module.exports = (req, res, next) => {
